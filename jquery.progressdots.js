@@ -6,12 +6,14 @@
         var transitionTime = 500;
         var running = true;
         var timer;
+
         var settings = $.extend({
             numDots: 5, //Number of dots
             swoopPause: 200, //Pause time between dots
             dotColor: "#0A78C7",
             dotSize: "12px",
-            radius: "100%"
+            radius: "100%",
+            randomColors: false //random colors on switch
         }, options);
 
         var dotsSelelector;
@@ -41,17 +43,16 @@
             
             clearInterval(timer);
 
-            if (!left) {
-                var removeClass = "swoopReverse";
-                var addClass = "swoopActive";
-            } else {
-                var removeClass = "swoopActive";
-                var addClass = "swoopReverse";
+            var addClass = left?"swoopReverse":"swoopActive";
+
+            dotsSelelector.removeClass( "swoopReverse swoopActive");
+
+            if ( left && settings.randomColors ) {
+                dotsSelelector.css( { "background-color": randomColor() } );
             }
 
-            dotsSelelector.removeClass(removeClass);
-
             for (i = settings.numDots - 1; i >= 0; i--) {
+
                 var dot = dots[i];
                 var percent = (i + 1) * (100 / (settings.numDots + 1));
 
@@ -59,23 +60,32 @@
                     left: (left ? "-" : "") + percent + "%"
                 });
 
+                timerPause = (settings.numDots + 2 - i) * settings.swoopPause;
+
                 timer = setTimeout(function (dot, sel) {
                     sel.addClass(addClass);
                     if (left) {
-                        i = dots.indexOf(dot);
-                        percent = (i + 1) * (100 / (settings.numDots + 1));
+                        dotIndex = dots.indexOf(dot);
+                        percent = ( dotIndex + 1 ) * ( 100 / (settings.numDots + 1 ) );
                     }
                     dot.css({
-                        left: left ? percent + "%" : "100%"
+                        left: (left ? percent : "100") + "%"
                     });
-                }, (settings.numDots + 2 - i) * settings.swoopPause, dots[i], dotsSelelector);
+                }, timerPause, dots[i], dotsSelelector );
+
             }
 
             $(dotsSelelector).first().bind( "transitionend", function () {
+                
                 $(this).unbind();
                 swoop(!left);
+            
             });
 
+        }
+
+        function randomColor() {
+            return '#'+Math.floor(Math.random()*16777215).toString(16);
         }
 
         createDots();

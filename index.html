@@ -77,9 +77,17 @@
 					options = {
 						numDots: numDots, 
 						dotColor:randomColor(),
-						dotSize: randomSize(),
-						radius: randomRadius()
+						dotSize: random( 5, 20 ) + "px",
+						radius: random( 10, 100 ) + "%"
 					};
+
+					randomHtml = "";
+
+					if ( random(1,10) % 2 )
+					{
+						options.randomColors = true;
+						randomHtml = "		\n\trandomColors: " + options.randomColors + " //Change colors after every pass";
+					}
 
 					container.dottify( options );
 
@@ -89,8 +97,9 @@
 		\n\tnumDots: " + options.numDots + ",\
 		\n\tdotColor: '" + options.dotColor + "',\
 		\n\tdotSize: '" + options.dotSize + "',\
-		\n\tradius: '" + options.radius + "'\
-\n});";
+		\n\tradius: '" + options.radius + "'" +
+		randomHtml +
+"\n});";
 
 					$("#jsContents").html(string);
 					Prism.highlightAll();
@@ -102,12 +111,8 @@
 			    return '#'+Math.floor(Math.random()*16777215).toString(16);
 			}
 
-			function randomSize () {
-				return Math.floor(Math.random() * ((20-5)+5) + 5);
-			}
-
-			function randomRadius () {
-				return Math.floor(Math.random() * ((100-10)+10) + 10);
+			function random ( min, max ) {
+				return Math.floor( Math.random() * ( ( max - min ) + min ) + min );
 			}
 			
 		});
