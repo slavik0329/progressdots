@@ -1,22 +1,36 @@
 # ProgressDots
 Awesome jQuery progressbar plugin
 
+<h2>Javascript</h2>
+```Javascript
+$( '#progressBox' ).dottify({		
+	numDots: 17,		
+	dotColor: '#51048e',		
+	dotSize: '7px',		
+	radius: '65%'		
+	randomColors: true //Change colors after every pass
+});
+```
+
 <h2>HTML</h2>
-			<code class="language-markup" id="htmlContents">&lt;!-- jQuery library included first --&gt;
-&lt;script src=&quot;jquery.min.js&quot;&gt;&lt;/script&gt; 
-&lt;!-- Include ProgressDots plugin --&gt;
-&lt;script src=&quot;jquery.progressdots.js&quot;&gt;&lt;/script&gt; 
-&lt;!-- Include CSS for plugin --&gt;
-&lt;link href=&quot;jquery.progressdots.css&quot; rel=&quot;stylesheet&quot;&gt; 
+```HTML
+<!-- jQuery library included first -->
+<script src="jquery.min.js"></script> 
+<!-- Include ProgressDots plugin -->
+<script src="jquery.progressdots.js"></script> 
+<!-- Include CSS for plugin -->
+<link href="jquery.progressdots.css" rel="stylesheet"> 
 
-&lt;!-- Create a container of any width/height  --&gt;
-&lt;div id=&#39;progressBox&#39;&gt;&lt;/div&gt; </code> 
-
-		 	<h2>CSS</h2>
-		 	<code class="language-css" id="cssContents">#progressBox  {
+<!-- Create a container of any width/height  -->
+<div id='progressBox'></div>
+```
+<h2>CSS</h2>
+```CSS
+#progressBox  {
     border: 1px solid #DDD;
     width: 80%;
     height: 40px;
-}</code>
+}
+```
 
-http://progressdots.rubixapps.com/
+Live demo: http://progressdots.rubixapps.com/
