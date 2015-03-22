@@ -5,7 +5,7 @@
     border-radius:100%;
     position: absolute;
     top: 50%;
-    transform: translatey(-50%);
+    transform: translatey(-50%) translatex(-50%);
 }
 .swoopActive {
     transition: all 500ms cubic-bezier(0.550, 0.055, 0.675, 0.190);
