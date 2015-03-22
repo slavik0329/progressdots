@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Progress Dots jQuery Plugin</title>
+	<link rel="stylesheet" href="jquery.progressdots.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="jquery.progressdots.js"></script>
+	<script src="app.js"></script>
+
+</head>
+<body>
+	<style>
+		#swoopProgContainer2 .swoopDot {
+			background-color: #333;
+		}
+
+		#swoopProgContainer3 .swoopDot {
+			background-color: #CD94DD;
+		}
+	</style>
+	
+	<div id="stop" class="btn">stop</div>
+	<div id="start" class="btn">start</div>
+	<script>
+		$(document).ready(function (){
+			$("#stop").click(function () {
+			    box1.stop();
+			});
+			
+			$("#start").click(function () {
+			    box1.start();
+			});
+
+			for ( var i=0;i<15;i++ )
+			{
+				var numDots = Math.floor(Math.random() * ((25-1)+1) + 1);	
+
+				var container = $("<div class='swoopContainer'></div>");
+
+				$("body").prepend( container );
+
+				container.dottify({numDots: numDots});
+			}
+			
+		});
+	</script>
+</body>
+</html>
