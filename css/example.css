@@ -28,11 +28,13 @@ body {
 #progressReset{
     background-color: #2FABB5;
     display: inline-block;
-    padding: 9px;
+    padding: 0px 8px;
     color: #FFF;
     cursor: pointer;
     border-radius: 3px;
     font-size: 16px;
+    line-height: 34px;
+    height: 32px;
 }
 
 #progressReset:active {
@@ -41,6 +43,7 @@ body {
 
 small {
     font-size: 50%;
+    color: #007983;
 }
 
 #sampleCode, .padded {
@@ -50,4 +53,11 @@ small {
 
 #codeContents{
     padding: 10px;
+}
+
+@media all and (max-width: 900px) {
+    #container {
+        width:  auto;
+        padding:0;
+    }
 }

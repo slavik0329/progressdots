@@ -69,7 +69,7 @@
                         percent = ( dotIndex + 1 ) * ( 100 / (settings.numDots + 1 ) );
                     }
                     dot.css({
-                        left: (left ? percent : "100") + "%"
+                        left: (left ? percent : "110") + "%"
                     });
                 }, timerPause, dots[i], dotsSelelector );
 
