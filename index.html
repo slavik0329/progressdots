@@ -4,43 +4,110 @@
 	<meta charset="UTF-8">
 	<title>Progress Dots jQuery Plugin</title>
 	<link rel="stylesheet" href="jquery.progressdots.css">
+	<link rel="stylesheet" href="css/prism.css">
+	<link rel="stylesheet" href="css/example.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 	<script src="jquery.progressdots.js"></script>
-	<script src="app.js"></script>
+	<script src="js/prism.js"></script>
 
 </head>
 <body>
-	<style>
-		#swoopProgContainer2 .swoopDot {
-			background-color: #333;
-		}
 
-		#swoopProgContainer3 .swoopDot {
-			background-color: #CD94DD;
-		}
-	</style>
-	
-	<div id="stop" class="btn">stop</div>
-	<div id="start" class="btn">start</div>
+	<div id="container">
+		<div class="padded">
+			<h1>ProgressDots jQuery Plugin <small>by Steve Dakh</small></h1>	
+
+			<div id="progressHolder"></div>
+
+			<div id="progressReset">New random style</div>
+		
+		</div>
+
+		<div id="sampleCode">
+			<h2>Javascript</h2>
+
+			<pre><code class="language-javascript" id="jsContents"></code></pre>
+
+			<h2>HTML</h2>
+			<pre><code class="language-markup" id="htmlContents">&lt;!-- jQuery library included first --&gt;
+&lt;script src=&quot;jquery.min.js&quot;&gt;&lt;/script&gt; 
+&lt;!-- Include ProgressDots plugin --&gt;
+&lt;script src=&quot;jquery.progressdots.js&quot;&gt;&lt;/script&gt; 
+&lt;!-- Include CSS for plugin --&gt;
+&lt;link href=&quot;jquery.progressdots.css&quot; rel=&quot;stylesheet&quot;&gt; 
+
+&lt;!-- Create a container of any width/height  --&gt;
+&lt;div id=&#39;progressBox&#39;&gt;&lt;/div&gt; </code></pre> 
+
+		 	<h2>CSS</h2>
+		 	<pre><code class="language-css" id="cssContents">#progressBox  {
+    border: 1px solid #DDD;
+    width: 80%;
+    height: 40px;
+}</code></pre>
+			
+		 </div>
+
+
+
+	</div>
+
+
 	<script>
 		$(document).ready(function (){
-			$("#stop").click(function () {
-			    box1.stop();
+		
+			createSpots(1);
+
+			$("#progressReset").click( function () {
+				createSpots(1);
 			});
 			
-			$("#start").click(function () {
-			    box1.start();
-			});
-
-			for ( var i=0;i<15;i++ )
+			function createSpots( num )
 			{
-				var numDots = Math.floor(Math.random() * ((25-1)+1) + 1);	
+				$("#progressHolder").html("");
 
-				var container = $("<div class='swoopContainer'></div>");
+				for ( var i=0;i<num;i++ )
+				{
+					var numDots = Math.floor(Math.random() * ((20-3)+3) + 3);	
 
-				$("body").prepend( container );
+					var container = $("<div class='swoopContainer'></div>");
 
-				container.dottify({numDots: numDots});
+					$("#progressHolder").append( container );
+
+					options = {
+						numDots: numDots, 
+						dotColor:randomColor(),
+						dotSize: randomSize(),
+						radius: randomRadius()
+					};
+
+					container.dottify( options );
+
+					var formattedOptions = JSON.stringify( options, null, "\t" );
+
+					string = "$( '#progressBox' ).dottify({\
+		\n\tnumDots: " + options.numDots + ",\
+		\n\tdotColor: '" + options.dotColor + "',\
+		\n\tdotSize: '" + options.dotSize + "',\
+		\n\tradius: '" + options.radius + "'\
+\n});";
+
+					$("#jsContents").html(string);
+					Prism.highlightAll();
+				}
+			}
+		
+
+			function randomColor() {
+			    return '#'+Math.floor(Math.random()*16777215).toString(16);
+			}
+
+			function randomSize () {
+				return Math.floor(Math.random() * ((20-5)+5) + 5);
+			}
+
+			function randomRadius () {
+				return Math.floor(Math.random() * ((100-10)+10) + 10);
 			}
 			
 		});

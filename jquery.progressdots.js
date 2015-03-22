@@ -8,19 +8,32 @@
         var timer;
         var settings = $.extend({
             numDots: 5, //Number of dots
-            swoopPause: 200 //Pause time between dots
+            swoopPause: 200, //Pause time between dots
+            dotColor: "#0A78C7",
+            dotSize: "12px",
+            radius: "100%"
         }, options);
 
         var dotsSelelector;
 
         function createDots() {
+            dotBox.css({
+                position: "relative",
+                overflow: "hidden"
+            }); 
+
             for (i = 0; i < settings.numDots; i++) {
                 var dot = $('<div class="swoopDot"></div>');
                 dots.push(dot);
                 dotBox.append(dot);
             }
 
-            dotsSelelector = dotBox.find( ".swoopDot" );
+            dotsSelelector = dotBox.find( ".swoopDot" ).css({
+                'background-color': settings.dotColor, 
+                width:settings.dotSize, 
+                height:settings.dotSize,
+                'border-radius': settings.radius
+            });
         }
 
         function swoop(left) {

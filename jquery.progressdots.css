@@ -1,12 +1,3 @@
-.swoopContainer  {
-    border: 1px solid #DDD;
-    width: 400px;
-    height: 40px;
-    border-radius: 4px;
-    position: relative;
-    overflow: hidden;
-    margin-bottom:10px;
-}
 .swoopDot {
     width: 12px;
     height: 12px;
