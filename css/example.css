@@ -54,7 +54,7 @@ small {
 
 @media all and (max-width: 900px) {
     #container {
-        width: 100%;
+        width:  auto;
         padding:0;
     }
 }
