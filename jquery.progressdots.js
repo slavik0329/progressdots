@@ -57,7 +57,7 @@
                     left: (left ? "-100" : percent) + "%"
                 });
 
-                timerPause = (settings.numDots + 2 - i) * settings.swoopPause;
+                var timerPause = (settings.numDots + 2 - i) * settings.swoopPause;
 
                 timer = setTimeout(function (dot, sel) {
                     sel.addClass(addClass);
