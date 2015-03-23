@@ -20,7 +20,7 @@
 
 			<div id="progressHolder"></div>
 
-			<div id="progressReset">Generate random styles</div>
+			<div id="progressReset">Generate random style</div>
 		
 		</div>
 
@@ -62,15 +62,15 @@
 	<script>
 		$(document).ready(function (){
 		
-			createSpots(5);
+			createSpots(1);
 
-			$("#progressReset").click( function () {
-				createSpots(5);
+			$("#progressReset").click( function (event) {
+				event.preventDefault();
+				createSpots(1);
 			});
 			
 			function createSpots( num )
 			{
-				$("#progressHolder").html("");
 
 				for ( var i=0;i<num;i++ )
 				{
@@ -98,11 +98,15 @@
 							randomHtml +
 					"\n});";
 
-					var container = $("<div class='swoopContainer'></div>").attr( "setupString", JSON.stringify( string ) );
+					var $container = $("<div class='swoopContainer'></div>").attr( "setupString", JSON.stringify( string ) );
 
-					$("#progressHolder").append( container );
+					$("#progressHolder").append( $container.hide() );
 
-					container.click( function () {
+					$container.slideDown( function () {
+						$(this).css({overflow:"hidden"});
+					});
+
+					$container.click( function () {
 						$(".swoopContainer").removeClass("selected");
 						$(this).addClass("selected");
 						
@@ -111,12 +115,13 @@
 						Prism.highlightAll();
 					});
 
-					container.dottify( options );
+					$container.dottify( options );
 
 					$("#jsContents").html(string);
 					Prism.highlightAll();
 				}
 
+				$(".swoopContainer").removeClass("selected");
 				$(".swoopContainer").last().addClass("selected");
 			}
 		

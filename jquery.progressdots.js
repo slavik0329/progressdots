@@ -70,7 +70,7 @@
 
                     //final state
                     dot.css({
-                        left: (left ? percent : "110") + "%"
+                        left: (left ? percent : "200") + "%"
                     });
 
                 }, timerPause, dots[i], dotsSelelector );
