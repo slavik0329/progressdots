@@ -16,7 +16,7 @@
             randomColors: false //random colors on switch
         }, options);
 
-        var dotsSelelector;
+        var $dotsSelelector;
 
         function createDots() {
             dotBox.css({
@@ -30,10 +30,10 @@
                 dots.push( dot.appendTo( dotBox ) );
             }
 
-            dotsSelelector = dotBox.find( ".swoopDot" ).css({
+            $dotsSelelector = dotBox.find( ".swoopDot" ).css({
                 'background-color'  : settings.dotColor, 
-                width               :settings.dotSize, 
-                height              :settings.dotSize,
+                width               : settings.dotSize, 
+                height              : settings.dotSize,
                 'border-radius'     : settings.radius
             });
         }
@@ -42,10 +42,10 @@
 
             var addClass = left?"swoopReverse":"swoopActive";
 
-            dotsSelelector.removeClass( "swoopReverse swoopActive");
+            $dotsSelelector.removeClass( "swoopReverse swoopActive");
 
             if ( left && settings.randomColors ) {
-                dotsSelelector.css( { "background-color": randomColor() } );
+                $dotsSelelector.css( { "background-color": randomColor() } );
             }
 
             for (i = settings.numDots - 1; i >= 0; i--) {
@@ -75,11 +75,11 @@
                         left: (left ? percent : "200") + "%"
                     });
 
-                }, timerPause, dots[i], dotsSelelector );
+                }, timerPause, dots[i], $dotsSelelector );
 
             }
 
-            $(dotsSelelector).first().bind( "transitionend", function () {
+            $dotsSelelector.first().bind( "transitionend", function () {
                 
                 $(this).unbind();
                 swoop(!left);
@@ -102,7 +102,7 @@
             },
             start: function () {
                 running = true;
-                dotsSelelector.removeClass("swoopReverse swoopActive");
+                $dotsSelelector.removeClass("swoopReverse swoopActive");
                 swoop();
             }
         }
