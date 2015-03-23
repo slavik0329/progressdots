@@ -7,7 +7,7 @@ $( '#progressBox' ).dottify({
 	numDots: 17,		
 	dotColor: '#51048e',		
 	dotSize: '7px',		
-	radius: '65%'		
+	radius: '60%',		
 	randomColors: true //Change colors after every pass
 });
 ```
@@ -27,7 +27,7 @@ $( '#progressBox' ).dottify({
 <h2>CSS</h2>
 ```CSS
 #progressBox  {
-    border: 1px solid #DDD;
+    border: 8px solid #DDD;
     width: 80%;
     height: 40px;
 }
