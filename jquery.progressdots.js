@@ -25,23 +25,20 @@
             }); 
 
             for (i = 0; i < settings.numDots; i++) {
-                var dot = $('<div class="swoopDot"></div>');
-                dots.push(dot);
-                dotBox.append(dot);
+                var percent = ( i + 1 ) * ( 100 / (settings.numDots + 1 ) );
+                var dot = $('<div class="swoopDot" pos="' + percent + '"></div>');
+                dots.push( dot.appendTo( dotBox ) );
             }
 
             dotsSelelector = dotBox.find( ".swoopDot" ).css({
-                'background-color': settings.dotColor, 
-                width:settings.dotSize, 
-                height:settings.dotSize,
-                'border-radius': settings.radius
+                'background-color'  : settings.dotColor, 
+                width               :settings.dotSize, 
+                height              :settings.dotSize,
+                'border-radius'     : settings.radius
             });
         }
 
         function swoop(left) {
-            if (!running) return false;
-            
-            clearInterval(timer);
 
             var addClass = left?"swoopReverse":"swoopActive";
 
@@ -54,10 +51,10 @@
             for (i = settings.numDots - 1; i >= 0; i--) {
 
                 var dot = dots[i];
-                var percent = (i + 1) * (100 / (settings.numDots + 1));
+                var percent = dot.attr("pos");
 
                 dot.css({
-                    left: (left ? "-" : "") + percent + "%"
+                    left: (left ? "-100" : percent) + "%"
                 });
 
                 timerPause = (settings.numDots + 2 - i) * settings.swoopPause;
@@ -65,8 +62,7 @@
                 timer = setTimeout(function (dot, sel) {
                     sel.addClass(addClass);
                     if (left) {
-                        dotIndex = dots.indexOf(dot);
-                        percent = ( dotIndex + 1 ) * ( 100 / (settings.numDots + 1 ) );
+                        percent = dot.attr("pos");
                     }
                     dot.css({
                         left: (left ? percent : "110") + "%"

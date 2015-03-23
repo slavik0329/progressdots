@@ -23,12 +23,17 @@ body {
     height: 40px;
     border-radius: 4px;
     margin: 0 auto 10px auto;
+    cursor: pointer;
+}
+
+.swoopContainer.selected {
+    border: 8px solid #2FABB5;
 }
 
 #progressReset{
     background-color: #2FABB5;
     display: inline-block;
-    padding: 0px 8px;
+    padding: 6px 12px;
     color: #FFF;
     cursor: pointer;
     border-radius: 3px;
