@@ -65,4 +65,8 @@ small {
         width:  auto;
         padding:0;
     }
+
+    h1 {
+        font-size: 120%;
+    }
 }

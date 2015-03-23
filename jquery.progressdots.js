@@ -53,20 +53,26 @@
                 var dot = dots[i];
                 var percent = dot.attr("pos");
 
-                dot.css({
+                //setting initial state
+                dot.css({                                       
                     left: (left ? "-100" : percent) + "%"
                 });
 
-                var timerPause = (settings.numDots + 2 - i) * settings.swoopPause;
+                var timerPause = (settings.numDots - i) * settings.swoopPause;
 
-                timer = setTimeout(function (dot, sel) {
-                    sel.addClass(addClass);
+                timer = setTimeout(function (dot, $sel) {
+                    
+                    $sel.addClass(addClass);
+
                     if (left) {
                         percent = dot.attr("pos");
                     }
+
+                    //final state
                     dot.css({
                         left: (left ? percent : "110") + "%"
                     });
+
                 }, timerPause, dots[i], dotsSelelector );
 
             }
