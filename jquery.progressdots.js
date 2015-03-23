@@ -13,7 +13,8 @@
             dotColor: "#0A78C7",
             dotSize: "12px",
             radius: "100%",
-            randomColors: false //random colors on switch
+            randomColors: false, //random colors on switch
+            progress: false 
         }, options);
 
         var $dotsSelelector;
@@ -24,8 +25,12 @@
                 overflow: "hidden"
             }); 
 
+
+            if ( settings.progress )
+                settings.numDots = 30;
+
             for (i = 0; i < settings.numDots; i++) {
-                var percent = ( i + 1 ) * ( 100 / (settings.numDots + 1 ) );
+                var percent = ( i + .5 ) * ( 100 / settings.numDots );
                 var dot = $('<div class="swoopDot" pos="' + percent + '"></div>');
                 dots.push( dot.appendTo( dotBox ) );
             }
@@ -36,6 +41,15 @@
                 height              : settings.dotSize,
                 'border-radius'     : settings.radius
             });
+
+            if ( settings.progress )
+            {
+                var dotWidth = dotBox.width() / settings.numDots;
+
+                $dotsSelelector.css({ height: "90%", width: dotWidth * .6 });                
+            }
+             
+
         }
 
         function swoop(left) {
