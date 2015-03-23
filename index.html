@@ -25,9 +25,11 @@
 		</div>
 
 		<div id="sampleCode">
-			<h2>Javascript</h2>
 
 			<pre><code class="language-javascript" id="jsContents"></code></pre>
+
+			<h2>Simple Javascript</h2>
+					 	<pre><code class="language-javascript" id="cssContents">$( '#progressBox' ).dottify(); //execute with default settings</code></pre>
 
 			<h2>HTML</h2>
 			<pre><code class="language-markup" id="htmlContents">&lt;!-- jQuery library included first --&gt;
@@ -40,9 +42,9 @@
 &lt;!-- Create a container of any width/height  --&gt;
 &lt;div id=&#39;progressBox&#39;&gt;&lt;/div&gt; </code></pre> 
 
-		 	<h2>CSS</h2>
+		 	<h2>CSS (Optional)</h2>
 		 	<pre><code class="language-css" id="cssContents">#progressBox  {
-    border: 1px solid #DDD;
+	border: 8px solid #D8D2CD;
     width: 80%;
     height: 40px;
 }</code></pre>
@@ -81,7 +83,7 @@
 					options = {
 						numDots: numDots, 
 						dotColor:randomColor(),
-						dotSize: random( 5, 20 ) + "px",
+						dotSize: random( 10, 20 ) + "px",
 						radius: random( 10, 100 ) + "%"
 					};
 
@@ -90,7 +92,7 @@
 					if ( random(1,10) % 2 )
 					{
 						options.randomColors = true;
-						randomHtml = ",		\n\trandomColors: " + options.randomColors + " //Change colors after every pass";
+						randomHtml = ",		\n\trandomColors: " + options.randomColors + " //change colors after every pass";
 					}
 
 					container.dottify( options );
@@ -98,10 +100,10 @@
 					var formattedOptions = JSON.stringify( options, null, "\t" );
 
 					string = "$( '#progressBox' ).dottify({\
-		\n\tnumDots: " + options.numDots + ",\
-		\n\tdotColor: '" + options.dotColor + "',\
-		\n\tdotSize: '" + options.dotSize + "',\
-		\n\tradius: '" + options.radius + "'" +
+		\n\tnumDots: " + options.numDots + ", //number of dots\
+		\n\tdotColor: '" + options.dotColor + "', //set dot color (#HEX)\
+		\n\tdotSize: '" + options.dotSize + "', //set size of dot\
+		\n\tradius: '" + options.radius + "' //set dot corner radius" +
 		randomHtml +
 "\n});";
 
