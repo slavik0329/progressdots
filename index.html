@@ -79,7 +79,7 @@
 						numDots: random( 3, 20 ), 
 						dotColor:randomColor(),
 						dotSize: random( 10, 20 ) + "px",
-						radius: random( 10, 100 ) + "%"
+						radius: random( 1, 7 ) * 10 + "%"
 					};
 
 					randomHtml = "";
@@ -125,7 +125,6 @@
 				$(".swoopContainer").last().addClass("selected");
 			}
 		
-
 			function randomColor() {
 			    return '#'+Math.floor(Math.random()*16777215).toString(16);
 			}

@@ -61,7 +61,9 @@
                 var timerPause = (settings.numDots - i) * settings.swoopPause;
 
                 timer = setTimeout(function (dot, $sel) {
-                    
+                    if ( !running )
+                        return false;
+
                     $sel.addClass(addClass);
 
                     if (left) {
