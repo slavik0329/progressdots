@@ -147,7 +147,7 @@
             start: function () {
                 running = true;
                 $dotsSelelector.removeClass("swoopReverse swoopActive");
-                swoop();
+                swoop( settings.progress );
             },
             setProgress: function (percent) {
                 settings.percent = percent;
