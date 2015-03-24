@@ -20,8 +20,7 @@
 
 			<div id="progressHolder"></div>
 
-			<div id="progressReset">Generate random style</div>
-		
+			<div id="progressReset">Generate random style</div>		
 		</div>
 
 		<div id="sampleCode">
@@ -84,7 +83,6 @@ progressBox.setProgress( 20 ); //update progress percentage</code></pre>
 				{
 
 					options = {
-						dotColor:randomColor(),
 						dotSize: random( 10, 20 ) + "px",
 						radius: random( 1, 7 ) * 10 + "%"
 					};
@@ -94,7 +92,13 @@ progressBox.setProgress( 20 ); //update progress percentage</code></pre>
 					if ( Math.random() < 0.5 )
 					{
 						options.randomColors = true;
-						randomHtml += "\n\trandomColors: " + options.randomColors + ", //change colors after every pass";
+						randomHtml += "\n\trandomColors: " + options.randomColors + ", //use random colors";
+					}
+					else
+					{
+						options.dotColor = randomColor();
+
+						randomHtml += "\n\tdotColor: '" + options.dotColor + "', //set dot color (#HEX)";
 					}
 
 					if ( Math.random() < 0.3 )
@@ -112,13 +116,12 @@ progressBox.setProgress( 20 ); //update progress percentage</code></pre>
 
 
 					string = "$( '#progressBox' ).dottify({\
-							\n\tdotColor: '" + options.dotColor + "', //set dot color (#HEX)\
 							\n\tdotSize: '" + options.dotSize + "', //set size of dot" +
 							randomHtml +
 							"\n\tradius: '" + options.radius + "' //set dot corner radius\
 					\n});";
 
-					var $container = $("<div class='swoopContainer'></div>").attr( "setupString", JSON.stringify( string ) );
+					var $container = $("<div class='swoopContainer'></div>").data( "setupString", JSON.stringify( string ) );
 
 					$("#progressHolder").append( $container.hide() );
 
@@ -130,7 +133,7 @@ progressBox.setProgress( 20 ); //update progress percentage</code></pre>
 						$(".swoopContainer").removeClass("selected");
 						$(this).addClass("selected");
 						
-						$("#jsContents").html( JSON.parse( $(this).attr("setupString") ) );
+						$("#jsContents").html( JSON.parse( $(this).data("setupString") ) );
 
 						Prism.highlightAll();
 					});

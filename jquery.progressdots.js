@@ -15,7 +15,7 @@
             radius: "100%",
             randomColors: false, //random colors on switch
             progress: false,
-            percent: 20 
+            percent: 0 
         }, options);
 
         var $dotsSelelector;
@@ -31,7 +31,7 @@
 
             for (i = 0; i < settings.numDots; i++) {
                 var percent = ( i + .5 ) * ( 100 / settings.numDots );
-                var dot = $('<div class="swoopDot" pos="' + percent + '"></div>');
+                var dot = $('<div class="swoopDot"></div>').data( "pos", percent );
                 dots.push( dot.appendTo( dotBox ) );
             }
 
@@ -69,7 +69,7 @@
 
             function moveDot ( i ) {
                 var dot = dots[i];
-                var percent = dot.attr("pos");
+                var percent = dot.data("pos");
 
                 //setting initial state
                 
@@ -99,13 +99,9 @@
 
                     $sel.addClass(addClass);
 
-                    if (left) {
-                        percent = dot.attr("pos");
-                    }
-
                     //final state
                     dot.css({
-                        left: (left ? percent : "200") + "%"
+                        left: (left ? dot.data("pos") : "200") + "%"
                     });
 
                 }, timerPause, dots[i], $dotsSelelector );
