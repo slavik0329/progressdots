@@ -63,6 +63,11 @@
 
             var movingDots = Math.floor( ( settings.percent / 100 ) * settings.numDots );
 
+            if ( !moveDots )
+            {
+                moveDots = 1;
+            }
+
             for (var i = 0; i < settings.numDots; i++) {
                 moveDot( i );
             }
