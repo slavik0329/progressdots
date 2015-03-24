@@ -112,7 +112,7 @@
                 }, timerPause, dots[i], $dotsSelelector );
             }
 
-            var transitionEndSelector;
+            var $transitionEndSelector;
 
             if ( settings.progress && left )
             {
