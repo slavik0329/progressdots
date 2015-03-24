@@ -29,7 +29,7 @@
             if ( settings.progress && !options.numDots )
                 settings.numDots = 30;
 
-            for (i = 0; i < settings.numDots; i++) {
+            for (var i = 0; i < settings.numDots; i++) {
                 var percent = ( i + .5 ) * ( 100 / settings.numDots );
                 var dot = $('<div class="swoopDot"></div>').data( "pos", percent );
                 dots.push( dot.appendTo( dotBox ) );
