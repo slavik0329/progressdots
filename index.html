@@ -20,8 +20,6 @@
 
 			<div id="progressHolder"></div>
 
-			<div class="swoopContainer"></div>
-
 			<div id="progressReset">Generate random style</div>
 		
 		</div>
@@ -51,6 +49,14 @@
     height: 40px;
 }</code></pre>
 
+			<h2>Advanced Options</h2>
+		 	<pre><code class="language-javascript" id="cssContents">var progressBox = $( '#progressBox' ).dottify({ 
+	progress:true, //start with progressbar on
+	percent:0
+}); 
+			
+progressBox.setProgress( 20 ); //update progress percentage</code></pre>
+
 		 	<h2>Download</h2>
 		 	<p>Download the latest version on <a href="https://github.com/slavik0329/progressdots">Github</a></p>
 			
@@ -64,14 +70,7 @@
 	<script>
 		$(document).ready(function (){
 		
-			// createSpots(1);
-			$( '.swoopContainer' ).dottify({							
-				dotColor: '#fafc6', //set dot color (#HEX)							
-				dotSize: '5px', //set size of dot							
-				radius: '20%', //set dot corner radius,		
-				progress: true,
-				randomColors: true //change colors after every pass
-			});
+			createSpots(1);
 
 			$("#progressReset").click( function (event) {
 				event.preventDefault();
@@ -85,7 +84,6 @@
 				{
 
 					options = {
-						numDots: random( 3, 15 ), 
 						dotColor:randomColor(),
 						dotSize: random( 10, 20 ) + "px",
 						radius: random( 1, 7 ) * 10 + "%"
@@ -96,16 +94,29 @@
 					if ( Math.random() < 0.5 )
 					{
 						options.randomColors = true;
-						randomHtml = ",		\n\trandomColors: " + options.randomColors + " //change colors after every pass";
+						randomHtml += "\n\trandomColors: " + options.randomColors + ", //change colors after every pass";
 					}
 
+					if ( Math.random() < 0.3 )
+					{
+						options.progress = true;
+						options.percent = random(5,100);
+
+						randomHtml += "\n\tprogress: true, //enable progress";
+						randomHtml += "\n\tpercent: " + options.percent + ", //set initial percentage";
+					} else {
+						options.numDots = random( 3, 15 ); 
+
+						randomHtml += "\n\tnumDots: " + options.numDots + ", //number of dots";
+					}
+
+
 					string = "$( '#progressBox' ).dottify({\
-							\n\tnumDots: " + options.numDots + ", //number of dots\
 							\n\tdotColor: '" + options.dotColor + "', //set dot color (#HEX)\
-							\n\tdotSize: '" + options.dotSize + "', //set size of dot\
-							\n\tradius: '" + options.radius + "' //set dot corner radius" +
+							\n\tdotSize: '" + options.dotSize + "', //set size of dot" +
 							randomHtml +
-					"\n});";
+							"\n\tradius: '" + options.radius + "' //set dot corner radius\
+					\n});";
 
 					var $container = $("<div class='swoopContainer'></div>").attr( "setupString", JSON.stringify( string ) );
 

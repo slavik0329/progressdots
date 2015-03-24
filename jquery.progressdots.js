@@ -14,7 +14,8 @@
             dotSize: "12px",
             radius: "100%",
             randomColors: false, //random colors on switch
-            progress: false 
+            progress: false,
+            percent: 20 
         }, options);
 
         var $dotsSelelector;
@@ -25,8 +26,7 @@
                 overflow: "hidden"
             }); 
 
-
-            if ( settings.progress )
+            if ( settings.progress && !options.numDots )
                 settings.numDots = 30;
 
             for (i = 0; i < settings.numDots; i++) {
@@ -48,7 +48,6 @@
 
                 $dotsSelelector.css({ height: "90%", width: dotWidth * .6 });                
             }
-             
 
         }
 
@@ -56,23 +55,43 @@
 
             var addClass = left?"swoopReverse":"swoopActive";
 
-            $dotsSelelector.removeClass( "swoopReverse swoopActive");
+            $dotsSelelector.removeClass( "swoopReverse swoopActive" );
 
             if ( left && settings.randomColors ) {
                 $dotsSelelector.css( { "background-color": randomColor() } );
             }
 
-            for (i = settings.numDots - 1; i >= 0; i--) {
+            var movingDots = Math.floor( ( settings.percent / 100 ) * settings.numDots );
 
+            for (var i = 0; i < settings.numDots; i++) {
+                moveDot( i );
+            }
+
+            function moveDot ( i ) {
                 var dot = dots[i];
                 var percent = dot.attr("pos");
 
                 //setting initial state
-                dot.css({                                       
-                    left: (left ? "-100" : percent) + "%"
-                });
+                
+                if ( ( left && settings.progress ) || !settings.progress )
+                {
+                    dot.css({                                       
+                        left: (left ? "-100" : percent) + "%"
+                    });    
+                }
+                
+                var timerPause;
+                if ( settings.progress && left )
+                {
+                    timerPause = i * settings.swoopPause;
+                }
+                else
+                {
+                    timerPause = ( (settings.progress?movingDots:settings.numDots) - i) * settings.swoopPause;
+                }
 
-                var timerPause = (settings.numDots - i) * settings.swoopPause;
+                if ( i >= movingDots && settings.progress )
+                    return false;
 
                 timer = setTimeout(function (dot, $sel) {
                     if ( !running )
@@ -90,10 +109,20 @@
                     });
 
                 }, timerPause, dots[i], $dotsSelelector );
-
             }
 
-            $dotsSelelector.first().bind( "transitionend", function () {
+            var transitionEndSelector;
+
+            if ( settings.progress && left )
+            {
+                $transitionEndSelector = dots[movingDots-1];
+            }
+            else
+            {
+                $transitionEndSelector = $dotsSelelector.first();
+            }
+
+            $transitionEndSelector.bind( "transitionend", function () {
                 
                 $(this).unbind();
                 swoop(!left);
@@ -107,7 +136,7 @@
         }
 
         createDots();
-        swoop();
+        swoop( settings.progress );
 
         return {
             stop: function () {
@@ -118,6 +147,9 @@
                 running = true;
                 $dotsSelelector.removeClass("swoopReverse swoopActive");
                 swoop();
+            },
+            setProgress: function (percent) {
+                settings.percent = percent;
             }
         }
     }
